@@ -77,13 +77,8 @@ else:
     st.write("Choose a transform type and Model from the otpions below:")
 
     transform_option = st.selectbox("Select data transform", ("None", "StandardScaler", "Normalize", "MinMaxScaler") )
-    model_option = st.selectbox("Select classifier", ("LogisticRegression", "SVM", "DecisionTree", "KNeighbors", "RandomForest"))
+    model_option = st.selectbox("Select classifier", ("LogisticRegression", "SVM", "ElasticNet", "Lasso"))
 
-    st.write("Here are the results of a logistic regression model:")
-    slover_option = st.selectbox("Select solver", ("lbfgs", "liblinear", "newton-cg", "newton-chowlesky"))
-
-    st.write({
-        "transform":transform_option, 
-        "model":model_option, 
-        "slover":slover_option
-    })
+    st.write(f"Here are the results of a {model_option} model:")
+    result = perform_prediction(filename=filename, model_name=model_option, transform=transform_option)
+    st.table(result)
